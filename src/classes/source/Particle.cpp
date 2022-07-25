@@ -70,7 +70,7 @@ const vector2& Particle::getDirection() const {
 }
 
 
-float Particle::getSpeed() const {
+const float& Particle::getSpeed() const {
 	return speed;
 }
 
@@ -83,15 +83,15 @@ bool Particle::isDead() const {
 	return lifeTime < 0.0f;
 }
 
-bool Particle::isFadeOut() const {
+const bool& Particle::isFadeOut() const {
 	return fadeOut;
 }
 
-bool Particle::isLockDown() const {
+const bool& Particle::isLockDown() const {
 	return lockDown;
 }
 
-float Particle::getAlpha() const {
+const float& Particle::getAlpha() const {
 	return colorParticle.a;
 }
 

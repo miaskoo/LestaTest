@@ -23,12 +23,12 @@ namespace test {
 
 		const bool& isVisible() const;
 		bool isDead() const;
-		bool isFadeOut() const;
+		const bool& isFadeOut() const;
 		const vector2& getPosition() const;
-		float getSpeed() const;
+		const float& getSpeed() const;
 		const vector2& getDirection() const;
-		bool isLockDown() const;
-		float getAlpha() const;
+		const bool& isLockDown() const;
+		const float& getAlpha() const;
 		const color& getColor() const;
 	private:
 		vector2 position;
