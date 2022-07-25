@@ -10,19 +10,25 @@ std::array<Emitter, variablesForTest::countEmitterInPool>& PoolEmitters::getPool
 }
 
 Emitter* PoolEmitters::getFreeEmitter() {
-	//To speed up the search time, i thought it would be better to check countBusy and also make a counter.
-	if (busyEmittersCounter.load() != variablesForTest::countEmitterInPool) {
-		auto counter = poolEmittersCounter.load();
+	// To speed up the search, I thought it would be better to create a busyEmittersCounter and check it,
+	//and also make a poolEmittersCounter to get it faster.
+	if (busyEmittersCounter.load(std::memory_order_relaxed) != variablesForTest::countEmitterInPool) {
+		auto counter = poolEmittersCounter.load(std::memory_order_relaxed);
 		if (counter >= poolEmitters.size()) {
 			counter = 0U;
 		}
 		if (poolEmitters[counter].isFree()) {
-			poolEmittersCounter.store(counter + 1);
+			poolEmittersCounter.fetch_add(1, std::memory_order_relaxed);
 			return &poolEmitters[counter];
 		}
-		for (auto& emitter : poolEmitters) {
-			if (emitter.isFree()) {
-				return &emitter;
+		for (auto n = counter + 1; n < poolEmitters.size(); n++) {
+			if (poolEmitters[n].isFree()) {
+				return &poolEmitters[n];
+			}
+		}
+		for (auto n = 0; n < counter; n++) {
+			if (poolEmitters[n].isFree()) {
+				return &poolEmitters[n];
 			}
 		}
 	}

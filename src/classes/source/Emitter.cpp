@@ -13,7 +13,7 @@ void Emitter::setFree(bool aFree) {
 		return;
 	}
 	free.store(aFree);
-	PoolEmitters::getInstance()->getBusyEmitterCounter().fetch_add(!aFree ? 1 : -1);
+	PoolEmitters::getInstance()->getBusyEmitterCounter().fetch_add(!aFree ? 1 : -1, std::memory_order_relaxed);
 }
 
 std::array<Particle, variablesForTest::countParticleInEmitter>& Emitter::getPoolParticles() {

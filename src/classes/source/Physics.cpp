@@ -20,7 +20,7 @@ void Physics::start() {
 }
 
 void Physics::threadUpdate() {
-	while (!isStop.load()) {
+	while (!isStop.load(std::memory_order_relaxed)) {
 		nvtxRangePush(__FUNCTION__);
 		auto time = GlobalTime::getInstance()->getTime();
 		auto dt = time - lastUpdateTime;
@@ -35,7 +35,7 @@ void Physics::threadUpdate() {
 }
 
 void Physics::stop() {
-	isStop.store(true);
+	isStop.store(true, std::memory_order_relaxed);
 }
 
 void Physics::update(int dt) {
