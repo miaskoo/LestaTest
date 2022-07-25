@@ -29,7 +29,9 @@ namespace test {
 		const vector2& getDirection() const;
 		const bool& isLockDown() const;
 		const float& getAlpha() const;
+#ifdef MULTICOLOR_PARTICLE_MODE
 		const color& getColor() const;
+#endif
 	private:
 		vector2 position;
 		float speed = 0.0f;
@@ -38,7 +40,11 @@ namespace test {
 		bool visible = false;
 		float fullLifeTime = 0.0f;
 		float lifeTime = 0.0f;
+#ifdef MULTICOLOR_PARTICLE_MODE
 		color colorParticle = variablesForTest::WHITE;
+#else
+		float alpha = 0.0f;
+#endif
 		bool lockDown = false;	
 		bool fadeOut = false;
 	};

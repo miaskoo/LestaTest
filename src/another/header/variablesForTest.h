@@ -1,7 +1,6 @@
 #pragma once
-#include <structHelper.h>
-
-//#define MULTICOLOR_PARTICLE_MODE
+#include "structHelper.h"
+#include <array>
 
 namespace variablesForTest {
 	const int minUpdatePeriodPhysicx = 5;
@@ -24,6 +23,7 @@ namespace variablesForTest {
 	const unsigned char minColor = 0;
 	const float maxColorF = 255.f;
 	const test::color WHITE(maxColor, maxColor, maxColor, maxColor);
+
 	const test::vector2 DOWN = test::vector2{ 0.0f, -1.0f };
 }
 

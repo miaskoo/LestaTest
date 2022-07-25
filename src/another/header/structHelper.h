@@ -1,7 +1,6 @@
 #pragma once
-#include <atomic>
-#include <array>
 #include "functionHelper.h"
+//#define MULTICOLOR_PARTICLE_MODE
 
 namespace test {
 	struct vector2 {
@@ -19,7 +18,12 @@ namespace test {
 	
 	struct ParticleCash {
 		vector2 pos;
+#ifdef MULTICOLOR_PARTICLE_MODE
 		color color;
 		ParticleCash(const test::vector2& aPos, const test::color& aColor) : pos(aPos), color(aColor) {}
+#else
+		uint8_t a = 0;
+		ParticleCash(const test::vector2& aPos, const float& aColor) : pos(aPos), a(aColor) {}
+#endif
 	};
 }

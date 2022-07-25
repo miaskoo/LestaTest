@@ -78,7 +78,11 @@ void Physics::update(int dt) {
 				particle.update(dtInSeconds);	
 				if (Render::isInRenderSpace(particle.getPosition()) && particle.getAlpha() != variablesForTest::minColor) {
 					if (needCash) {
+#ifdef MULTICOLOR_PARTICLE_MODE
 						Render::getInstance()->getFrameForCash().emplace_back(particle.getPosition(), particle.getColor());
+#else
+						Render::getInstance()->getFrameForCash().emplace_back(particle.getPosition(), particle.getAlpha());
+#endif
 					}
 				}
 				else {

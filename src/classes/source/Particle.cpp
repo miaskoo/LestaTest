@@ -10,7 +10,11 @@ void Particle::update(float dt) {
 			setAlpha(static_cast<uint8_t>(static_cast<float>(variablesForTest::maxColorF) * functionHelper::getPercentFromNumbers(fadeOutTime, variablesForTest::timeFadeOutParticle)));
 			return;
 		}
+#ifdef MULTICOLOR_PARTICLE_MODE
 		colorParticle.a = variablesForTest::minColor;
+#else
+		alpha = variablesForTest::minColor;
+#endif
 	}
 	if (isDead()) {
 		return;
@@ -46,11 +50,19 @@ void Particle::setLockDown(bool aLockDown) {
 }
 
 void Particle::setAlpha(uint8_t a) {
+#ifdef MULTICOLOR_PARTICLE_MODE
 	colorParticle.a = a;
+#else
+	alpha = a;
+#endif
 }
 
 void Particle::setColor(const color& aColorParticle) {
+#ifdef MULTICOLOR_PARTICLE_MODE
 	colorParticle = aColorParticle;
+#else
+	alpha = aColorParticle.a;
+#endif
 }
 
 void Particle::setFadeOut(bool aFadeOut) {
@@ -92,9 +104,15 @@ const bool& Particle::isLockDown() const {
 }
 
 const float& Particle::getAlpha() const {
+#ifdef MULTICOLOR_PARTICLE_MODE
 	return colorParticle.a;
+#else
+	return alpha;
+#endif
 }
 
+#ifdef MULTICOLOR_PARTICLE_MODE
 const color& Particle::getColor() const {
 	return colorParticle;
 }
+#endif

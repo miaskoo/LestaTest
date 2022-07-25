@@ -19,6 +19,7 @@ void Render::draw() {
 	}
 	auto& cashedFrame = getCashedFrame();
 	for (auto& partile : cashedFrame) {
+#ifdef MULTICOLOR_PARTICLE_MODE
 		platform::drawPoint(
 			partile.pos.x,
 			partile.pos.y,
@@ -27,6 +28,16 @@ void Render::draw() {
 			functionHelper::getColorFloatFromChar(partile.color.b),
 			functionHelper::getColorFloatFromChar(partile.color.a));
 	}
+#else
+		platform::drawPoint(
+			partile.pos.x,
+			partile.pos.y,
+			1.f,
+			1.f,
+			1.f,
+			functionHelper::getColorFloatFromChar(partile.a));
+	}
+#endif
 }
 
 std::vector<ParticleCash>& Render::getCashedFrame() {

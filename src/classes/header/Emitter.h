@@ -1,5 +1,6 @@
 #pragma once
-#include <Particle.h>
+#include "Particle.h"
+#include <atomic>
 
 namespace test {
 	class Emitter {

@@ -1,6 +1,7 @@
 #pragma once
 #include "Emitter.h"
 #include "variablesForTest.h"
+#include <atomic>
 
 namespace test {
 	class PoolEmitters {
