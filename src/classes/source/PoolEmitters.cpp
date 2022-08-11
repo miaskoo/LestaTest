@@ -2,8 +2,7 @@
 #include "variablesForTest.h"
 
 using namespace test;
-
-static PoolEmitters instance;
+static PoolEmitters* instance = nullptr;
 
 std::array<Emitter, variablesForTest::countEmitterInPool>& PoolEmitters::getPoolEmitters() {
 	return poolEmitters;
@@ -47,7 +46,15 @@ void PoolEmitters::spawnFreeEmitterOnPos(Emitter* freeEmitter, float startX, flo
 }
 
 PoolEmitters* PoolEmitters::getInstance() {
-	return &instance;
+	if (!instance) {
+		instance = new PoolEmitters();
+	}
+	return instance;
+}
+
+void PoolEmitters::cleanup() {
+	delete instance;
+	instance = nullptr;
 }
 
 std::atomic_size_t& PoolEmitters::getBusyEmitterCounter() {

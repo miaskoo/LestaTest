@@ -29,6 +29,7 @@ void Emitter::initEmitter(float x, float y) {
 		particle.setVisible(true);
 		particle.setLifeTime(static_cast<float>(functionHelper::getRndBetween(variablesForTest::muduleLifeTime, variablesForTest::minLifeTimeParticle)));
 		particle.setLockDown(false);
+		particle.setFadeOut(false);
 		particle.setFadeOutTime(variablesForTest::timeFadeOutParticle);
 #ifdef MULTICOLOR_PARTICLE_MODE
 		particle.setColor(functionHelper::getRndColor());

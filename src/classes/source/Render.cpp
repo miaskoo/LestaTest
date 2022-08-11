@@ -6,7 +6,7 @@
 
 using namespace test;
 
-static Render instance;
+static Render* instance = nullptr;
 
 Render::Render() {
 	frame1.reserve(variablesForTest::totalCountParticle);
@@ -49,7 +49,15 @@ std::vector<ParticleCash>& Render::getFrameForCash() {
 }
 
 Render* Render::getInstance() {
-	return &instance;
+	if (!instance) {
+		instance = new Render();
+	}
+	return instance;
+}
+
+void Render::cleanup() {
+	delete instance;
+	instance = nullptr;
 }
 
 bool Render::isInRenderSpace(const vector2& pos) {

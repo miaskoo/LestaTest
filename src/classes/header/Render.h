@@ -7,16 +7,17 @@ namespace test {
 	class Particle;
 	class Render {
 	public:
-		Render();
-		~Render() = default;
 		static bool isInRenderSpace(const vector2& pos);
-		static Render* getInstance();
 		void draw();
 		void changeFrame();
 		void markDirty();
 		bool isDirty();
 		std::vector<ParticleCash>& getFrameForCash();
+		static Render* getInstance();
+		void cleanup();
 	private:
+		Render();
+		~Render() = default;
 		std::vector<ParticleCash>& getCashedFrame();
 		std::vector<ParticleCash> frame1;
 		std::vector<ParticleCash> frame2;

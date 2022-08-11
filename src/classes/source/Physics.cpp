@@ -8,7 +8,7 @@
 
 using namespace test;
 
-Physics instance;
+Physics* instance = nullptr;
 
 Physics::Physics() :
 	thread(&Physics::threadUpdate, this)
@@ -136,5 +136,13 @@ void Physics::moveParticle(Particle& particle, float dtInSeconds, float gravityI
 }
 
 Physics* Physics::getInstance() {
-	return &instance;
+	if (!instance) {
+		instance = new Physics();
+	}
+	return instance;
+}
+
+void Physics::cleanup() {
+	delete instance;
+	instance = nullptr;
 }

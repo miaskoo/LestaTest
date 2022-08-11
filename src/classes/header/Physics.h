@@ -6,12 +6,13 @@
 namespace test {
 	class Physics {
 	public:
-		Physics();
-		~Physics() = default;
 		void start();
 		void stop();
 		static Physics* getInstance();
+		static void cleanup();
 	private:
+		Physics();
+		~Physics() = default;
 		void threadUpdate();
 		void update(int dt);
 		void moveParticle(Particle& particle, float dtInSeconds, float gravity);
